@@ -1,2 +1,4 @@
-*.pem
-*.crx
+/*.pem
+/*.crx
+/node_modules/
+/package-lock.json
