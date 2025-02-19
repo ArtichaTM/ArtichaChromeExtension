@@ -24,7 +24,7 @@ function check_url() {
     }
 }
 
-if ( document.readyState === "complete" )  {
+if ( document.readyState !== "loading" )  {
 	check_url();
 } else {
 	document.addEventListener('DOMContentLoaded', check_url);
