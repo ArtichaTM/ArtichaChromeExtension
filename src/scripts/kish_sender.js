@@ -1,14 +1,26 @@
+
+
 function task_page(group, task) {
 	const base_url = `https://articha.tplinkdns.com/chrome-extension/${group}/${task}`
-	$.getJSON({
-		url: base_url + '/exists',
-		success: function(json) {
-			if (json.exists) {
-				return;
-			}
-			$.post(base_url, {'body': $('body').prop("outerHTML")})
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
+		if (this.readyState != 4) return;
+		if (this.status != 200) {
+			return;
 		}
-	})
+		var data = JSON.parse(this.responseText);
+		if (data.exists) {
+			return;
+		}
+		var post = new XMLHttpRequest();
+		post.open("POST", base_url, true);
+		post.setRequestHeader('Content-Type', 'application/json');
+		post.send(JSON.stringify({
+			body:  document.getElementsByTagName('body')[0].outerHTML
+		}));
+	};
+	xhr.open('GET', base_url + '/exists', true);
+	xhr.send();
 }
 
 function check_url() {
