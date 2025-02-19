@@ -11,7 +11,16 @@ function task_page(group, task) {
 				},
 				body: document.getElementsByTagName('body')[0].outerHTML
 			})
-				.then(r => console.log(`Response: ${r}`))
+				.then(r => alert(
+					"Новая страница успешно загружена плагином ArtichaChromeExtension"
+				))
+				.catch(reason => {
+					console.error(reason.message);
+				})
+			;
+		})
+		.catch(reason => {
+			console.error(reason.message);
 		})
 	;
 }
