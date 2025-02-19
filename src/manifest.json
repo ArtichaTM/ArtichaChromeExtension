@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "ArtichaSiteExtension",
-	"version": "0.3",
+	"version": "0.4",
 	"description": "Useful utilities provided by Articha site",
 	"homepage_url": "https://articha.tplinkdns.com/chrome-extension/",
 	"update_url": "https://articha.tplinkdns.com/chrome-extension/updates.xml/",
@@ -12,7 +12,10 @@
 		"128": "images/icon/128.png"
 	},
 	"content_scripts": [{
-		"js": ["scripts/kish_sender.js"],
+		"js": [
+			"scripts/jQuery.js",
+			"scripts/kish_sender.js"
+	],
 		"matches": [
 			"https://kispython.ru/*"
 		]
