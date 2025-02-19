@@ -1,7 +1,7 @@
 
 
 function task_page(group, task) {
-	const base_url = `https://articha.tplinkdns.com/chrome-extension/${group}/${task}`
+	const base_url = `https://articha.tplinkdns.com/chrome-extension/api/${group}/${task}`
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (this.readyState != 4) return;
@@ -24,11 +24,15 @@ function task_page(group, task) {
 }
 
 function check_url() {
-	output = regex.exec(window.location.href);
 	const regex = new RegExp("files\/task\/([0-9]+)\/group\/([0-9]+)");
+	output = regex.exec(window.location.href);
     if (output) {
 		task_page(output[2], output[1]);
     }
 }
 
-document.addEventListener('DOMContentLoaded', check_url);
+if ( document.readyState === "complete" )  {
+	check_url();
+} else {
+	document.addEventListener('DOMContentLoaded', check_url);
+}
