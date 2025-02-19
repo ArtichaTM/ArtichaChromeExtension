@@ -1,38 +1,31 @@
-
-
-function task_page(group, task) {
+async function task_page(group, task) {
 	const base_url = `https://articha.tplinkdns.com/chrome-extension/api/${group}/${task}`
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function () {
-		if (this.readyState != 4) return;
-		if (this.status != 200) {
-			return;
-		}
-		var data = JSON.parse(this.responseText);
-		if (data.exists) {
-			return;
-		}
-		var post = new XMLHttpRequest();
-		post.open("POST", base_url, true);
-		post.setRequestHeader('Content-Type', 'application/json');
-		post.send(JSON.stringify({
-			body:  document.getElementsByTagName('body')[0].outerHTML
-		}));
-	};
-	xhr.open('GET', base_url + '/exists', true);
-	xhr.send();
+	var response = await fetch(base_url + '/exists');
+
+	if (await response.json().then(json => json.exists)) { return; }
+
+	fetch(base_url, {
+		method: 'POST',
+		headers: {
+        	'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"body":  document.getElementsByTagName('body')[0].outerHTML
+		})
+	})
+		.then(r => console.log(`Response: ${r}`))
 }
 
-function check_url() {
+async function check_url() {
 	const regex = new RegExp("files\/task\/([0-9]+)\/group\/([0-9]+)");
 	output = regex.exec(window.location.href);
     if (output) {
-		task_page(output[2], output[1]);
+		await task_page(output[2], output[1]);
     }
 }
 
 if ( document.readyState === "complete" )  {
-	check_url();
+	await check_url();
 } else {
 	document.addEventListener('DOMContentLoaded', check_url);
 }
