@@ -4,7 +4,7 @@
 	"version": "0.4",
 	"description": "Useful utilities provided by Articha site",
 	"homepage_url": "https://articha.tplinkdns.com/chrome-extension/",
-	"update_url": "https://articha.tplinkdns.com/chrome-extension/updates.xml/",
+	"update_url": "https://articha.tplinkdns.com/chrome-extension/updates.xml",
 
 	"icons": {
 		"16": "images/icon/16.png",
