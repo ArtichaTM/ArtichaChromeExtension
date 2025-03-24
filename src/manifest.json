@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "ArtichaSiteExtension",
-	"version": "1.2",
+	"version": "1.2.1",
 	"description": "Useful utilities provided by Articha site",
 	"homepage_url": "https://articha.tplinkdns.com/chrome-extension/",
 	"update_url": "https://articha.tplinkdns.com/chrome-extension/updates.xml",

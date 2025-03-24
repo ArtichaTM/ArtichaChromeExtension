@@ -4,12 +4,15 @@ function task_page(group, task) {
 		.then(response => response.json())
 		.then(json => {
 			if (json.exists) return;
+			const body = document.getElementsByTagName('body')[0].outerHTML
+			if (body.length < 6000) {return;}
+
 			fetch(base_url, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'text/plain'
 				},
-				body: document.getElementsByTagName('body')[0].outerHTML
+				body: body
 			})
 				.then(r => alert(
 					"Новая страница успешно загружена плагином ArtichaChromeExtension"
